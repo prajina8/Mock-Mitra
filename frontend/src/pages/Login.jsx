@@ -97,9 +97,7 @@ export default function Login() {
           </form>
         </div>
 
-        <p className="mt-5 text-center text-xs text-faint">
-          Your account is stored in MongoDB — passwords are hashed, sessions use JWT.
-        </p>
+        
       </div>
     </div>
   );

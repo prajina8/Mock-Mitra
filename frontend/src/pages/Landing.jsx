@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Logo, PrimaryButton, GhostButton, Stamp } from "../components/UI.jsx";
 
-/* A repeating row of open-book glyphs sits behind a dark, semi-opaque
-   scrim so the books read as texture, not noise — true to a "stack of
-   reference books" feel without competing with the headline. */
+
 function BookField() {
   const row = Array.from({ length: 8 });
   return (
@@ -29,8 +27,7 @@ export default function Landing() {
   return (
     <div className="relative min-h-screen bg-ink overflow-hidden flex flex-col">
       <BookField />
-      {/* opaque scrim so the book texture stays a backdrop, not a distraction */}
-      <div className="absolute inset-0 bg-ink/90" />
+            <div className="absolute inset-0 bg-ink/90" />
 
       <header className="relative z-10 mx-auto w-full max-w-6xl px-6 py-6 flex items-center justify-between">
         <Logo />
