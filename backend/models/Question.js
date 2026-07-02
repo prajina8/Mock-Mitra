@@ -13,7 +13,7 @@ const questionSchema = new mongoose.Schema(
       required: true,
       validate: (v) => v.length >= 2,
     },
-    answer: { type: Number, required: true }, // index into options
+    answer: { type: Number, required: true },
     difficulty: { type: String, enum: ["easy", "medium", "hard"], default: "medium" },
   },
   { timestamps: true }
