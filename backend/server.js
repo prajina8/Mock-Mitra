@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import questionRoutes from "./routes/questionRoutes.js";
 import attemptRoutes from "./routes/attemptRoutes.js";
 
+
 dotenv.config();
 connectDB();
 
@@ -20,10 +21,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/attempts", attemptRoutes);
 
-// 404 handler
+
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 
-// Central error handler
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.status || 500).json({ message: err.message || "Server error" });
