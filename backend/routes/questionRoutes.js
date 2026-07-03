@@ -23,7 +23,7 @@ router.get("/probable", protect, async (req, res) => {
 
     const questions = await Question.aggregate([{ $sample: { size: count } }]);
 
-    // Never leak the answer index to the client before submission.
+  
     const sanitized = questions.map((q) => ({
       id: q._id,
       subject: q.subject,
@@ -43,7 +43,7 @@ router.get("/", protect, async (req, res) => {
   res.json(questions);
 });
 
-// POST /api/questions (add a new question to the bank)
+
 router.post("/", protect, async (req, res) => {
   try {
     const { subject, text, options, answer, difficulty } = req.body;

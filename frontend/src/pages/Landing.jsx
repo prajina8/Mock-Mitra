@@ -39,7 +39,7 @@ export default function Landing() {
       <main className="relative z-10 flex-1 flex items-center">
         <div className="mx-auto max-w-2xl px-6 text-center">
           <div className="flex justify-center mb-5">
-            <Stamp>Loksewa Aayog · Practice Engine</Stamp>
+           
           </div>
           <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-offwhite leading-tight">
             Your mitra for the<br />Loksewa exam shelf.

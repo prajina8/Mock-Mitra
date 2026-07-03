@@ -30,7 +30,7 @@ export default function Progress() {
   return (
     <div className="space-y-8">
       <div>
-        <Stamp>Performance record</Stamp>
+       
         <h1 className="mt-3 font-serif text-2xl font-semibold">Your progress</h1>
       </div>
 

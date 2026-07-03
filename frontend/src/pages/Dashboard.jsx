@@ -43,7 +43,7 @@ export default function Dashboard({ user }) {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <Stamp>Loksewa Aayog · Probable Set</Stamp>
+         
           <h1 className="mt-3 font-serif text-3xl font-semibold text-offwhite">Namaste, {user.name}.</h1>
           <p className="mt-1 text-sm text-muted max-w-md">
             Fresh probable questions are pulled from the question bank each time you sit a mock test.
