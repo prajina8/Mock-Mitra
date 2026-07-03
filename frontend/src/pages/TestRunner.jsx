@@ -23,10 +23,18 @@ export default function TestRunner({ onFinish }) {
 
   useEffect(() => {
     api
-      .get("/questions/probable", { params: { count: 6 } })
-      .then((res) => setQuestions(res.data))
-      .catch(() => setError("Could not load questions. Is the backend running and seeded?"))
-      .finally(() => setLoading(false));
+     api
+  .get("/questions/probable", { params: { count: 6 } })
+  .then((res) => {
+    console.log("Questions:", res.data);
+    setQuestions(res.data);
+  })
+  .catch((err) => {
+    console.log("Status:", err.response?.status);
+    console.log("Data:", err.response?.data);
+    setError(err.response?.data?.message || err.message);
+  })
+  .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -48,7 +56,13 @@ export default function TestRunner({ onFinish }) {
     );
   }
 
-  const q = questions[idx];
+ if (questions.length === 0) {
+  return (
+    <div className="text-center py-20">
+      <h2>No questions found.</h2>
+    </div>
+  );
+}
   const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
   const ss = String(seconds % 60).padStart(2, "0");
 
