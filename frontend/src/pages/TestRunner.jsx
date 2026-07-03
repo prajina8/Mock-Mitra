@@ -23,19 +23,16 @@ export default function TestRunner({ onFinish }) {
 
   useEffect(() => {
     api
-     api
+     
   .get("/questions/probable", { params: { count: 6 } })
   .then((res) => {
     console.log("Questions:", res.data);
     setQuestions(res.data);
   })
-  .catch((err) => {
-    console.log("Status:", err.response?.status);
-    console.log("Data:", err.response?.data);
-    setError(err.response?.data?.message || err.message);
-  })
-  .finally(() => setLoading(false));
-  }, []);
+  .catch(() => setError("Could not load questions. Is the backend running and seeded?"))
+    .finally(() => setLoading(false));
+}, []);
+  
 
   useEffect(() => {
     if (loading || error) return;
@@ -76,6 +73,7 @@ export default function TestRunner({ onFinish }) {
         questionId: qq.id,
         picked: picked[qq.id] ?? null,
       }));
+      console.log("Submitting answers:", answers);
       const res = await api.post("/attempts", { answers, seconds });
       onFinish(res.data);
       navigate("/app/results");
@@ -84,6 +82,7 @@ export default function TestRunner({ onFinish }) {
       setSubmitting(false);
     }
   };
+  const q = questions[idx];
 
   const subj = SUBJECTS.find((s) => s.id === q.subject);
 

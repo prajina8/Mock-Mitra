@@ -6,10 +6,6 @@ import protect from "../middleware/auth.js";
 
 const router = express.Router();
 
-// POST /api/attempts
-// body: { answers: [{ questionId, picked }], seconds }
-// Server re-checks every answer against the real question bank so the
-// client never has to be trusted with correct answers ahead of submission.
 router.post("/", protect, async (req, res) => {
   try {
     const { answers = [], seconds = 0 } = req.body;
@@ -23,7 +19,7 @@ router.post("/", protect, async (req, res) => {
 
     let correctCount = 0;
     const gradedAnswers = answers.map((a) => {
-      const q = byId.get(a.questionId);
+      const q = byId.get(String(a.questionId));
       if (!q) return null;
       const isCorrect = a.picked === q.answer;
       if (isCorrect) correctCount += 1;
@@ -35,18 +31,24 @@ router.post("/", protect, async (req, res) => {
         isCorrect,
       };
     }).filter(Boolean);
+    const totalQuestions = gradedAnswers.length;
+
+const scorePct =
+  totalQuestions > 0
+    ? Math.round((correctCount / totalQuestions) * 100)
+    : 0;
 
     const attempt = await Attempt.create({
       user: req.user._id,
       total: gradedAnswers.length,
       correct: correctCount,
+      
       scorePct: Math.round((correctCount / gradedAnswers.length) * 100),
       seconds,
       answers: gradedAnswers,
     });
 
-    // Return full question text/options alongside the grading so the
-    // frontend can render a results review without a second round trip.
+    
     const reviewQuestions = gradedAnswers.map((ans) => {
       const q = byId.get(ans.question.toString());
       return {
@@ -74,7 +76,7 @@ router.post("/", protect, async (req, res) => {
   }
 });
 
-// GET /api/attempts  — this user's attempt history (most recent last)
+
 router.get("/", protect, async (req, res) => {
   const attempts = await Attempt.find({ user: req.user._id })
     .sort({ createdAt: 1 })
@@ -82,7 +84,7 @@ router.get("/", protect, async (req, res) => {
   res.json(attempts);
 });
 
-// GET /api/attempts/progress — subject-wise accuracy summary
+
 router.get("/progress", protect, async (req, res) => {
   const attempts = await Attempt.find({ user: req.user._id });
 

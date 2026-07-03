@@ -18,21 +18,23 @@ router.get("/subjects", protect, (req, res) => {
 
 
 router.get("/probable", protect, async (req, res) => {
+  console.log(" /probable route called");
+
   try {
     const count = Math.min(parseInt(req.query.count, 10) || 6, 30);
 
-    const questions = await Question.aggregate([{ $sample: { size: count } }]);
+    const total = await Question.countDocuments();
+    console.log("Total questions:", total);
 
-  
-    const sanitized = questions.map((q) => ({
-      id: q._id,
-      subject: q.subject,
-      text: q.text,
-      options: q.options,
-    }));
+    const questions = await Question.aggregate([
+      { $sample: { size: count } }
+    ]);
 
-    res.json(sanitized);
+    console.log("Returned:", questions.length);
+
+    res.json(questions);
   } catch (err) {
+    console.error("ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 });
