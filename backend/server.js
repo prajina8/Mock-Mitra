@@ -6,7 +6,6 @@ import authRoutes from "./routes/authRoutes.js";
 import questionRoutes from "./routes/questionRoutes.js";
 import attemptRoutes from "./routes/attemptRoutes.js";
 
-
 dotenv.config();
 connectDB();
 
