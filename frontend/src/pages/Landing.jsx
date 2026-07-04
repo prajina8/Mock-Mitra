@@ -45,7 +45,7 @@ export default function Landing() {
             Your mitra for the<br />Loksewa exam shelf.
           </h1>
           <p className="mt-5 text-[#C7C4BC] text-base max-w-md mx-auto">
-            Mock Mitra turns the question bank into fresh, probable mock tests — sit them,
+            Mock Mitra turns the question bank into fresh, probable mock tests ,
             see what you missed, and watch your subject-wise progress build over time.
           </p>
           <div className="mt-9 flex items-center justify-center gap-3">
