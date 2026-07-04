@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/", protect, async (req, res) => {
   try {
     const { answers = [], seconds = 0 } = req.body;
+    console.log("Received answers:", answers);
 
     if (!Array.isArray(answers) || answers.length === 0) {
       return res.status(400).json({ message: "answers array is required" });
@@ -19,6 +20,18 @@ router.post("/", protect, async (req, res) => {
     const questions = await Question.find({
       _id: { $in: ids },
     });
+    console.log("Questions found:", questions.length);
+
+questions.forEach((q) => {
+  console.log("DB Question ID:", q._id.toString());
+});
+
+ids.forEach((id) => {
+  console.log("Received ID:", id);
+});
+    console.log("IDs:", ids);
+console.log("Questions found:", questions.length);
+
     console.log("Questions found:", questions);
 console.log("Questions length:", questions.length);
 

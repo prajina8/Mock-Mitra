@@ -74,6 +74,7 @@ export default function TestRunner({ onFinish }) {
         picked: picked[qq._id] ?? null,
       }));
       console.log("Submitting answers:", answers);
+      console.log("Answers being sent:", answers);
       const res = await api.post("/attempts", { answers, seconds });
       console.log("Submitting:", answers);
       onFinish(res.data);
