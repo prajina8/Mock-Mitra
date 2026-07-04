@@ -4,10 +4,10 @@ import { Stamp, Seal, PrimaryButton, GhostButton } from "../components/UI.jsx";
 import api from "../api/client.js";
 
 const SUBJECTS = [
-  { id: "gk", name: "General Knowledge", icon: "🏛️" },
-  { id: "nepal", name: "Nepal Affairs", icon: "🇳🇵" },
-  { id: "math", name: "Mental Ability", icon: "🧮" },
-  { id: "constitution", name: "Constitution", icon: "📜" },
+  { id: "gk", name: "General Knowledge" },
+  { id: "nepal", name: "Nepal Affairs" },
+  { id: "math", name: "Mental Ability"},
+  { id: "constitution", name: "Constitution" },
 ];
 
 export default function TestRunner({ onFinish }) {
@@ -24,7 +24,7 @@ export default function TestRunner({ onFinish }) {
   useEffect(() => {
     api
      
-  .get("/questions/probable", { params: { count: 6 } })
+  .get("/questions/probable", { params: { count: 20 } })
   .then((res) => {
     console.log("Questions:", res.data);
     setQuestions(res.data);
