@@ -63,18 +63,19 @@ export default function TestRunner({ onFinish }) {
   const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
   const ss = String(seconds % 60).padStart(2, "0");
 
-  const choose = (optionIdx) => setPicked((p) => ({ ...p, [q.id]: optionIdx }));
+  const choose = (optionIdx) => setPicked((p) => ({ ...p, [q._id]: optionIdx }));
 
   const finish = async () => {
     clearInterval(timerRef.current);
     setSubmitting(true);
     try {
       const answers = questions.map((qq) => ({
-        questionId: qq.id,
-        picked: picked[qq.id] ?? null,
+        questionId: qq._id,
+        picked: picked[qq._id] ?? null,
       }));
       console.log("Submitting answers:", answers);
       const res = await api.post("/attempts", { answers, seconds });
+      console.log("Submitting:", answers);
       onFinish(res.data);
       navigate("/app/results");
     } catch (err) {
@@ -113,7 +114,7 @@ export default function TestRunner({ onFinish }) {
 
         <div className="mt-6 space-y-2.5">
           {q.options.map((opt, i) => {
-            const selected = picked[q.id] === i;
+            const selected = picked[q._id] === i;
             return (
               <button
                 key={i}
