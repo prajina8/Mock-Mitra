@@ -4,10 +4,10 @@ import { Stamp, PrimaryButton } from "../components/UI.jsx";
 import api from "../api/client.js";
 
 const SUBJECTS = [
-  { id: "gk", name: "General Knowledge", icon: "🏛️" },
-  { id: "nepal", name: "Nepal Affairs", icon: "🇳🇵" },
-  { id: "math", name: "Mental Ability", icon: "🧮" },
-  { id: "constitution", name: "Constitution", icon: "📜" },
+  { id: "gk", name: "General Knowledge" },
+  { id: "nepal", name: "Nepal Affairs"},
+  { id: "math", name: "Mental Ability" },
+  { id: "constitution", name: "Constitution" },
 ];
 
 function StatCard({ label, value, suffix, accent }) {
